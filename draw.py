@@ -9,7 +9,7 @@ def add_polygon( points, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
 
 
 def draw_polygons( points, screen, color ):
-    if len(matrix < 3):
+    if len(points) < 3:
         print 'Need at least 3 points to draw'
         return
     while point < len(matrix) -1:
@@ -38,22 +38,11 @@ def add_box( points, x, y, z, width, height, depth ):
     #front
     add_polygon(points, x,y,z, x,y1,z, x1,y1,z)
     add_polygon(points, x1,y1,z, x1,y,z, x,y,z)
-    
-    add_edge(points, x, y, z, x1, y, z)
-    add_edge(points, x, y1, z, x1, y1, z)
-    add_edge(points, x1, y, z, x1, y1, z)
-    add_edge(points, x, y, z, x, y1, z)
 
     #back
     add_polygon(points, x,y,z1, x,y1,z1, x1,y1,z1)
     add_polygon(points, x1,y1,z1, x1,y,z1, x,y,z1)
-    
-    add_edge(points, x, y, z1, x1, y, z1)
-    add_edge(points, x, y1, z1, x1, y1, z1)
-    add_edge(points, x1, y, z1, x1, y1, z1)
-    add_edge(points, x, y, z1, x, y1, z1)
 
-    #sides
     #right
     add_polygon(points, x1,y,z, x1,y1,z, x1,y1,z1)
     add_polygon(points, x1,y1,z1, x1,y,z1, x1,y,z)
@@ -67,10 +56,7 @@ def add_box( points, x, y, z, width, height, depth ):
     add_polygon(points, x,y1,z, x,y1,z1, x1,y1,z1)
     add_polygon(points, x1,y1,z1, x1,y1,z, x,y1,z)
     
-    add_edge(points, x, y, z, x, y, z1)
-    add_edge(points, x1, y, z, x1, y, z1)
-    add_edge(points, x, y1, z, x, y1, z1)
-    add_edge(points, x1, y1, z, x1, y1, z1)
+ 
 
 def add_sphere( edges, cx, cy, cz, r, step ):
     points = generate_sphere(cx, cy, cz, r, step)
@@ -85,12 +71,16 @@ def add_sphere( edges, cx, cy, cz, r, step ):
         for longt in range(longt_start, longt_stop+1):
             index = lat * step + longt
 
-            add_edge(edges, points[index][0],
-                     points[index][1],
-                     points[index][2],
-                     points[index][0]+1,
-                     points[index][1]+1,
-                     points[index][2]+1 )
+            add_polygon(edges,
+                            #1
+                     points[index][0], #x
+                     points[index][1], #y
+                     points[index][2],#z
+                           #2
+                     points[index+1][0],
+                     points[index+1][1],
+                     points[index+1][2],
+                          #3
 
 def generate_sphere( cx, cy, cz, r, step ):
     points = []
