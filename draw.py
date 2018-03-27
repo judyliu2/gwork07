@@ -72,11 +72,11 @@ def add_sphere( edges, cx, cy, cz, r, step ):
             index = lat * step + longt
 
             add_polygon(edges,
-                            #1
+                            #1 long and lat?
                      points[index][0], #x
                      points[index][1], #y
                      points[index][2],#z
-                           #2
+                           #2 
                      points[index+1][0],
                      points[index+1][1],
                      points[index+1][2],
