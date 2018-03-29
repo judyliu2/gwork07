@@ -81,9 +81,9 @@ def add_sphere( edges, cx, cy, cz, r, step ):
                      points[index+1][1],
                      points[index+1][2],
                           #3
-                    points[index+10][0],
-                    points[index+10][1],
-                    points[index+10][2]
+                    points[index+12][0],
+                    points[index+12][1],
+                    points[index+12][2]
                           )
 
 def generate_sphere( cx, cy, cz, r, step ):
