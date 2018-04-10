@@ -185,13 +185,13 @@ def add_torus( edges, cx, cy, cz, r0, r1, step ):
     
             add_polygon(edges,
                         #1 
-                        points[index][0], #x
-                        points[index][1], #y
-                        points[index][2],#z
+                        points[next_index][0], #x
+                        points[next_index][1], #y
+                        points[next_index][2],#z
                         #2 
-                        points[next_index][0],
-                        points[next_index][1],
-                        points[next_index][2],
+                        points[index][0],
+                        points[index][1],
+                        points[index][2],
                         #3
                         points[bot_index][0],
                         points[bot_index][1],
