@@ -75,15 +75,18 @@ def add_sphere( edges, cx, cy, cz, r, step ):
     longt_stop = step
     step+= 1
     for lat in range(lat_start, lat_stop):
-        for longt in range(longt_start, longt_stop+1):
+        for longt in range(longt_start, longt_stop):
             index = lat * step + longt
             next_index = index + 1
             top_index = (lat+1) * step + longt
-            bot_index = (lat-1) *step + longt
+            bot_index = (lat-1) *step + longt +1
 
             #closure at beginning/ end of the sphere
             if (lat == lat_start):
-                bot_index = (lat_stop -1)*step + longt
+                if (longt+1== longt_stop):
+                    bot_index = lat_start
+                else:
+                    bot_index = (lat_stop -1)*step + longt +1
 
             if (lat +1 == lat_stop):
                 top_index = longt
@@ -108,13 +111,13 @@ def add_sphere( edges, cx, cy, cz, r, step ):
     
             add_polygon(edges,
                         #1 
-                        points[index][0], #x
-                        points[index][1], #y
-                        points[index][2],#z
+                        points[next_index][0], #x
+                        points[next_index][1], #y
+                        points[next_index][2],#z
                         #2 
-                        points[next_index][0],
-                        points[next_index][1],
-                        points[next_index][2],
+                        points[index][0],
+                        points[index][1],
+                        points[index][2],
                         #3
                         points[bot_index][0],
                         points[bot_index][1],
@@ -158,9 +161,11 @@ def add_torus( edges, cx, cy, cz, r0, r1, step ):
             top_index = (lat+1) * step + longt
             bot_index = (lat-1) *step + longt
 
-            #closure at beginning/ end of the sphere
             if (lat == lat_start):
-                bot_index = (lat_stop -1)*step + longt
+                if (longt+1== longt_stop):
+                    bot_index = lat_start
+                else:
+                    bot_index = (lat_stop -1)*step + longt +1
 
             if (lat +1 == lat_stop):
                 top_index = longt
@@ -197,6 +202,7 @@ def add_torus( edges, cx, cy, cz, r0, r1, step ):
                         points[bot_index][1],
                         points[bot_index][2]
             )
+            
 def generate_torus( cx, cy, cz, r0, r1, step ):
     points = []
     rot_start = 0
